@@ -1,0 +1,33 @@
+syntax = "proto3";
+package auth;
+
+option go_package = "auth/v2";
+
+
+message User {
+    message UserAddOptions {
+        bool no_password = 1;
+    };
+
+    string name = 1;
+    string password = 2;
+
+    repeated string roles = 3;
+
+    UserAddOptions options = 4;
+}
+
+message Role {
+    string name = 1;
+    repeated Permission keyPermission = 2;
+}
+
+message Permission {
+    enum Type {
+        READ = 0;
+        WRITE = 1;
+        READWRITE = 2;
+    }
+
+    Type permType = 1;
+}
